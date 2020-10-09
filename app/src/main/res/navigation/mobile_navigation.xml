@@ -8,19 +8,19 @@
     <fragment
         android:id="@+id/navigation_profile"
         android:name="com.hadenhiles.myskills.ui.profile.ProfileFragment"
-        android:label="@string/title_home"
+        android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" />
 
     <fragment
         android:id="@+id/navigation_history"
         android:name="com.hadenhiles.myskills.ui.history.HistoryFragment"
-        android:label="@string/title_dashboard"
+        android:label="@string/title_history"
         tools:layout="@layout/fragment_history" />
 
     <fragment
         android:id="@+id/navigation_start"
         android:name="com.hadenhiles.myskills.ui.start.StartFragment"
-        android:label="@string/title_notifications"
+        android:label="@string/title_start"
         tools:layout="@layout/fragment_start" />
     <fragment
         android:id="@+id/navigation_drills"
