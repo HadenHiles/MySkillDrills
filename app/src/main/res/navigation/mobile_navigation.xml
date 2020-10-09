@@ -3,23 +3,33 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_profile">
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.hadenhiles.myskills.ui.home.HomeFragment"
+        android:id="@+id/navigation_profile"
+        android:name="com.hadenhiles.myskills.ui.profile.ProfileFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_profile" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.hadenhiles.myskills.ui.dashboard.DashboardFragment"
+        android:id="@+id/navigation_history"
+        android:name="com.hadenhiles.myskills.ui.history.HistoryFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_history" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.hadenhiles.myskills.ui.notifications.NotificationsFragment"
+        android:id="@+id/navigation_start"
+        android:name="com.hadenhiles.myskills.ui.start.StartFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_start" />
+    <fragment
+        android:id="@+id/navigation_drills"
+        android:name="com.hadenhiles.myskills.ui.drills.DrillsFragment"
+        android:label="@string/title_drills"
+        tools:layout="@layout/fragment_drills" />
+    <fragment
+        android:id="@+id/navigation_routines"
+        android:name="com.hadenhiles.myskills.ui.routines.RoutinesFragment"
+        android:label="@string/title_routines"
+        tools:layout="@layout/fragment_routines" />
 </navigation>

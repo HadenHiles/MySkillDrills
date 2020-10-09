@@ -1,13 +1,13 @@
-package com.hadenhiles.myskills.ui.dashboard
+package com.hadenhiles.myskills.ui.start
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class DashboardViewModel : ViewModel() {
+class StartViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is dashboard Fragment"
+        value = "This is the Start Fragment"
     }
     val text: LiveData<String> = _text
 }

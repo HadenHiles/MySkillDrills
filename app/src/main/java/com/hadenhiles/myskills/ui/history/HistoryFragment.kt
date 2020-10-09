@@ -1,4 +1,4 @@
-package com.hadenhiles.myskills.ui.dashboard
+package com.hadenhiles.myskills.ui.history
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,20 +10,20 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.hadenhiles.myskills.R
 
-class DashboardFragment : Fragment() {
+class HistoryFragment : Fragment() {
 
-    private lateinit var dashboardViewModel: DashboardViewModel
+    private lateinit var historyViewModel: HistoryViewModel
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        dashboardViewModel =
-                ViewModelProviders.of(this).get(DashboardViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_dashboard, container, false)
-        val textView: TextView = root.findViewById(R.id.text_dashboard)
-        dashboardViewModel.text.observe(viewLifecycleOwner, Observer {
+        historyViewModel =
+                ViewModelProviders.of(this).get(HistoryViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_history, container, false)
+        val textView: TextView = root.findViewById(R.id.text_history)
+        historyViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
         return root
