@@ -1,4 +1,4 @@
-package com.hadenhiles.myskills.ui.start
+package com.hadenhiles.myskilldrills.ui.start
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.hadenhiles.myskills.R
+import com.hadenhiles.myskilldrills.R
 
 class StartFragment : Fragment() {
 

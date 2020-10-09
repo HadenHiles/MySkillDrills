@@ -1,4 +1,4 @@
-package com.hadenhiles.myskills.ui.routines
+package com.hadenhiles.myskilldrills.ui.routines
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.lifecycle.Observer
-import com.hadenhiles.myskills.R
+import com.hadenhiles.myskilldrills.R
 
 class RoutinesFragment : Fragment() {
 

@@ -1,4 +1,4 @@
-package com.hadenhiles.myskills.ui.profile
+package com.hadenhiles.myskilldrills.ui.profile
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

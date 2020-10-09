@@ -1,4 +1,4 @@
-package com.hadenhiles.myskills
+package com.hadenhiles.myskilldrills
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

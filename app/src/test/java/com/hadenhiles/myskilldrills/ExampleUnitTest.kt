@@ -1,4 +1,4 @@
-package com.hadenhiles.myskills
+package com.hadenhiles.myskilldrills
 
 import org.junit.Test
 

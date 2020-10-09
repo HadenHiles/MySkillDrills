@@ -1,13 +1,13 @@
-package com.hadenhiles.myskills.ui.start
+package com.hadenhiles.myskilldrills.ui.history
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class StartViewModel : ViewModel() {
+class HistoryViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is the Start Fragment"
+        value = "This is the History Fragment"
     }
     val text: LiveData<String> = _text
 }
