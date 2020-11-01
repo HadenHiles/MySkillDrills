@@ -1,4 +1,5 @@
 .DS_Store
+.idea
 .idea/
 .idea/shelf
 /confluence/target
@@ -63,4 +64,3 @@ local.properties
 buildSrcTmp/
 distTmp/
 outTmp/
-.idea

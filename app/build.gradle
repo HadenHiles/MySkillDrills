@@ -1,13 +1,14 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
 
     defaultConfig {
-        applicationId "com.hadenhiles.myskills"
+        applicationId "com.hadenhiles.skilldrills"
         minSdkVersion 23
         targetSdkVersion 30
         versionCode 1
