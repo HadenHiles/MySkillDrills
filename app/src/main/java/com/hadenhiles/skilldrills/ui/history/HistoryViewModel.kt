@@ -1,12 +1,13 @@
-package com.hadenhiles.myskilldrills.ui.routines
+package com.hadenhiles.skilldrills.ui.history
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class RoutinesViewModel : ViewModel() {
+class HistoryViewModel : ViewModel() {
+
     private val _text = MutableLiveData<String>().apply {
-        value = "This is the Routines Fragment"
+        value = "This is the History Fragment"
     }
     val text: LiveData<String> = _text
 }

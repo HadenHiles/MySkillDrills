@@ -1,13 +1,13 @@
-package com.hadenhiles.myskilldrills.ui.start
+package com.hadenhiles.skilldrills.ui.profile
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class StartViewModel : ViewModel() {
+class ProfileViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is the Start Fragment"
+        value = "This is the Profile Fragment"
     }
     val text: LiveData<String> = _text
 }

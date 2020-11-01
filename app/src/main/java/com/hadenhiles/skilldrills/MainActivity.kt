@@ -1,4 +1,4 @@
-package com.hadenhiles.myskilldrills
+package com.hadenhiles.skilldrills
 
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView

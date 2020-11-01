@@ -1,4 +1,4 @@
-package com.hadenhiles.myskilldrills.ui.drills
+package com.hadenhiles.skilldrills.ui.drills
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.lifecycle.Observer
-import com.hadenhiles.myskilldrills.R
+import com.hadenhiles.skilldrills.R
 
 class DrillsFragment : Fragment() {
 

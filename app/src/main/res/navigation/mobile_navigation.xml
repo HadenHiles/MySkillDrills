@@ -7,29 +7,29 @@
 
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="com.hadenhiles.myskilldrills.ui.profile.ProfileFragment"
+        android:name="com.hadenhiles.skilldrills.ui.profile.ProfileFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" />
 
     <fragment
         android:id="@+id/navigation_history"
-        android:name="com.hadenhiles.myskilldrills.ui.history.HistoryFragment"
+        android:name="com.hadenhiles.skilldrills.ui.history.HistoryFragment"
         android:label="@string/title_history"
         tools:layout="@layout/fragment_history" />
 
     <fragment
         android:id="@+id/navigation_start"
-        android:name="com.hadenhiles.myskilldrills.ui.start.StartFragment"
+        android:name="com.hadenhiles.skilldrills.ui.start.StartFragment"
         android:label="@string/title_start"
         tools:layout="@layout/fragment_start" />
     <fragment
         android:id="@+id/navigation_drills"
-        android:name="com.hadenhiles.myskilldrills.ui.drills.DrillsFragment"
+        android:name="com.hadenhiles.skilldrills.ui.drills.DrillsFragment"
         android:label="@string/title_drills"
         tools:layout="@layout/fragment_drills" />
     <fragment
         android:id="@+id/navigation_routines"
-        android:name="com.hadenhiles.myskilldrills.ui.routines.RoutinesFragment"
+        android:name="com.hadenhiles.skilldrills.ui.routines.RoutinesFragment"
         android:label="@string/title_routines"
         tools:layout="@layout/fragment_routines" />
 </navigation>
