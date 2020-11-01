@@ -21,7 +21,9 @@ class LoginActivity : AppCompatActivity() {
         val providers = arrayListOf(
             AuthUI.IdpConfig.EmailBuilder().build(),
             AuthUI.IdpConfig.GoogleBuilder().build(),
-            AuthUI.IdpConfig.FacebookBuilder().build()
+            //AuthUI.IdpConfig.FacebookBuilder().build()
+            // TODO: figure out why Facebook sign in isn't working.
+            //  Could be due to a change in the facebook graph api requirements that causes insufficient permissions, disabling for now.
         )
 
         // Create and launch sign-in intent
