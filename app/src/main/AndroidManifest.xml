@@ -11,6 +11,7 @@
         android:roundIcon="@mipmap/skill_drills_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".CustomLoginActivity"></activity>
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,9 +21,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name" />
-
-        <!-- Facebook meta data (start) -->
+            android:label="@string/app_name" /> <!-- Facebook meta data (start) -->
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_application_id" />

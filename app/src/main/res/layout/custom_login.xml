@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/secondaryColor">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@color/fui_transparent">
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/skilldrills_dark_bg"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="@color/fui_transparent" />
+
+        <!--email button-->
+        <LinearLayout
+            android:id="@+id/emailSignInButton"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/logo"
+            android:layout_marginTop="75dp"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:layout_gravity="center"
+            android:background="@color/primaryColor"
+            android:orientation="horizontal"
+            android:focusable="true">
+
+            <ImageView
+                android:id="@+id/emailIcon"
+                android:layout_width="50dp"
+                android:layout_height="70dp"
+                android:padding="10dp"
+                android:src="@drawable/ic_baseline_email_24"
+                android:background="@color/fui_transparent"
+                android:contentDescription="@string/google_sign_in" />
+            <Button
+                android:id="@+id/emailButton"
+                android:layout_width="wrap_content"
+                android:layout_height="70dp"
+                android:layout_marginEnd="10dp"
+                android:background="@null"
+                android:text="@string/email_sign_in"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+
+        <!--google button-->
+        <LinearLayout
+            android:id="@+id/googleSignInButton"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/emailSignInButton"
+            android:layout_marginTop="10dp"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:layout_gravity="center"
+            android:background="@android:color/white"
+            android:orientation="horizontal"
+            android:focusable="true">
+
+            <ImageView
+                android:id="@+id/googleIcon"
+                android:layout_width="50dp"
+                android:layout_height="70dp"
+                android:padding="5dp"
+                android:src="@drawable/ic_google"
+                android:background="@color/fui_transparent"
+                android:contentDescription="@string/google_sign_in" />
+            <Button
+                android:id="@+id/googleButton"
+                android:layout_width="wrap_content"
+                android:layout_height="70dp"
+                android:layout_marginEnd="10dp"
+                android:background="@null"
+                android:text="@string/google_sign_in"
+                android:textAllCaps="false"
+                android:textColor="#333333" />
+        </LinearLayout>
+
+        <!--facebook button-->
+<!--        <LinearLayout-->
+<!--            android:id="@+id/facebookSignInButton"-->
+<!--            android:layout_width="250dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/googleSignInButton"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:paddingStart="15dp"-->
+<!--            android:paddingEnd="15dp"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:background="@color/facebook"-->
+<!--            android:orientation="horizontal">-->
+
+<!--            <ImageView-->
+<!--                android:id="@+id/facebookIcon"-->
+<!--                android:layout_width="50dp"-->
+<!--                android:layout_height="70dp"-->
+<!--                android:paddingStart="0dp"-->
+<!--                android:paddingTop="15dp"-->
+<!--                android:paddingEnd="15dp"-->
+<!--                android:paddingBottom="15dp"-->
+<!--                android:src="@drawable/ic_facebook"-->
+<!--                android:background="@color/fui_transparent"-->
+<!--                android:contentDescription="@string/google_sign_in" />-->
+<!--            <Button-->
+<!--                android:id="@+id/facebookButton"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="70dp"-->
+<!--                android:layout_marginEnd="10dp"-->
+<!--                android:background="@null"-->
+<!--                android:text="@string/facebook_sign_in"-->
+<!--                android:textAllCaps="false"-->
+<!--                android:textColor="@android:color/white" />-->
+<!--        </LinearLayout>-->
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
