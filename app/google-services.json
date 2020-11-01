@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1041048753828",
+    "firebase_url": "https://skill-drills-app.firebaseio.com",
+    "project_id": "skill-drills-app",
+    "storage_bucket": "skill-drills-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1041048753828:android:9830a5e848e585d14e7831",
+        "android_client_info": {
+          "package_name": "com.hadenhiles.skilldrills"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1041048753828-99e5l94eo9n9nr5fg8a0iqstcnob8j6s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8mer9C33fFalfat6dI69GO4_S0J-QVFU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1041048753828-99e5l94eo9n9nr5fg8a0iqstcnob8j6s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
