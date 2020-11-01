@@ -40,6 +40,7 @@
 
             <ImageView
                 android:id="@+id/emailIcon"
+                android:duplicateParentState="true"
                 android:layout_width="50dp"
                 android:layout_height="70dp"
                 android:padding="10dp"
@@ -48,6 +49,7 @@
                 android:contentDescription="@string/google_sign_in" />
             <Button
                 android:id="@+id/emailButton"
+                android:duplicateParentState="true"
                 android:layout_width="wrap_content"
                 android:layout_height="70dp"
                 android:layout_marginEnd="10dp"
@@ -75,6 +77,7 @@
 
             <ImageView
                 android:id="@+id/googleIcon"
+                android:duplicateParentState="true"
                 android:layout_width="50dp"
                 android:layout_height="70dp"
                 android:padding="5dp"
@@ -83,6 +86,7 @@
                 android:contentDescription="@string/google_sign_in" />
             <Button
                 android:id="@+id/googleButton"
+                android:duplicateParentState="true"
                 android:layout_width="wrap_content"
                 android:layout_height="70dp"
                 android:layout_marginEnd="10dp"
@@ -109,6 +113,7 @@
 
 <!--            <ImageView-->
 <!--                android:id="@+id/facebookIcon"-->
+<!--                android:duplicateParentState="true"-->
 <!--                android:layout_width="50dp"-->
 <!--                android:layout_height="70dp"-->
 <!--                android:paddingStart="0dp"-->
@@ -120,6 +125,7 @@
 <!--                android:contentDescription="@string/google_sign_in" />-->
 <!--            <Button-->
 <!--                android:id="@+id/facebookButton"-->
+<!--                android:duplicateParentState="true"-->
 <!--                android:layout_width="wrap_content"-->
 <!--                android:layout_height="70dp"-->
 <!--                android:layout_marginEnd="10dp"-->

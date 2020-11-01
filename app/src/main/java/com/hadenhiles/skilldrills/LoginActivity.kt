@@ -23,6 +23,12 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        // If the user is already signed in then send to the main activity
+        if (FirebaseAuth.getInstance().currentUser != null) {
+            val intent = Intent(applicationContext, MainActivity::class.java)
+            startActivity(intent)
+        }
+
         // Initialize the firebase ui intent
         // Email, Google, Facebook
         val providers = arrayListOf(
