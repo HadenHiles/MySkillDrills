@@ -1,4 +1,4 @@
-<img src="./SkillDrills-final.svg" width="500">
+<img src="./SkillDrills.svg" width="500">
 
 Track your training progress in skill-based drills. Users can create their own custom drills with unique "Drill Types" that allow flexible ways to track their progress. Users can immediately start with an empty session OR create routines which conveniently house their drills and how many sets of each drill they would like to perform.
 
