@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
+import com.firebase.ui.auth.ui.idp.AuthMethodPickerActivity
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 
@@ -30,6 +31,9 @@ class LoginActivity : AppCompatActivity() {
         startActivityForResult(
             AuthUI.getInstance()
                 .createSignInIntentBuilder()
+                .setTheme(R.style.LoginTheme)
+                .setLogo(R.drawable.skilldrills_light_bg)
+                .setIsSmartLockEnabled(!BuildConfig.DEBUG)
                 .setAvailableProviders(providers)
                 .build(),
             RC_SIGN_IN
