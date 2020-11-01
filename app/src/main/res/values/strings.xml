@@ -6,6 +6,6 @@
     <string name="title_drills">Drills</string>
     <string name="title_routines">Routines</string>
 
-    <string name="facebook_app_id">697890737493317</string>
-    <string name="fb_login_protocol_scheme">fb697890737493317</string>
+    <string name="facebook_application_id">697890737493317</string>
+    <string name="facebook_login_protocol_scheme">fb697890737493317</string>
 </resources>
