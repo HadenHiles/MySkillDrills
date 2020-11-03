@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/secondaryColor">
+    android:background="@color/primaryColor">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -36,7 +36,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/logo"
             android:elevation="2dp"
-            android:backgroundTint="@color/primaryColor"
+            android:backgroundTint="@color/secondaryColor"
             android:textColor="@android:color/white"
             app:iconTint="@android:color/white"
             android:text="@string/email_sign_in"
@@ -57,7 +57,7 @@
             app:layout_constraintTop_toBottomOf="@+id/emailSignInButton"
             android:elevation="2dp"
             android:backgroundTint="@android:color/white"
-            android:textColor="@color/primaryColor"
+            android:textColor="@color/secondaryColor"
             app:iconTint="@null"
             app:iconTintMode="add"
             android:text="@string/google_sign_in"
