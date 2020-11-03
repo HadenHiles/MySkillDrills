@@ -24,6 +24,6 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        displayName.text = FirebaseAuth.getInstance().currentUser?.displayName ?: "Fail";
+        displayName.text = FirebaseAuth.getInstance().currentUser?.displayName ?: "";
     }
 }
