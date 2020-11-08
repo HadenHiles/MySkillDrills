@@ -1,7 +1,8 @@
 package com.hadenhiles.skilldrills.models
 
-class DrillType(name: String, title: String, descriptor: String) {
-    var name: String? = name
+class DrillType(id: String, title: String, descriptor: String, measurements: Array<Measurement>) {
+    var id: String? = id
     var title: String? = title
     var descriptor: String? = descriptor
+    var measurements: Array<Measurement>? = measurements
 }
