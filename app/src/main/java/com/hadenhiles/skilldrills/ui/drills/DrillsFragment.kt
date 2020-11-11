@@ -23,7 +23,7 @@ class DrillsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         addDrillButton.setOnClickListener {
-            val intent = Intent(activity, AddDrillActivity::class.java)
+            val intent = Intent(context?.applicationContext, AddDrillActivity::class.java)
             startActivity(intent)
         }
     }

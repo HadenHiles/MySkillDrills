@@ -11,4 +11,7 @@
     <string name="google_sign_in">Sign in with Google</string>
     <string name="facebook_sign_in">Sign in with Facebook</string>
     <string name="email_sign_in">Sign in with Email</string>
+    <string name="add_drill_name_hint">Add Name</string>
+    <string name="add_drill_description_hint">Add Drill Description</string>
+    <string name="add_drill_fab_description">Add</string>
 </resources>
