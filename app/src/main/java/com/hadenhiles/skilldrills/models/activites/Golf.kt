@@ -4,5 +4,5 @@ import com.hadenhiles.skilldrills.models.Activity
 
 class Golf : Activity() {
     override var name: String? = "Golf"
-    override var categories: Array<String>? = arrayOf("Driving", "Fairway", "Rough", "Approach", "Bunker", "Putting")
+    override var categories: List<String>? = listOf("Driving", "Fairway", "Rough", "Approach", "Bunker", "Putting")
 }

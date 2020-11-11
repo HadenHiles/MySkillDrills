@@ -7,5 +7,5 @@ import java.time.Duration
 class DurationCountdown: DrillType() {
     override var title: String? = "durationCountdown"
     override var descriptor: String? = "A drill with a countdown duration"
-    override var measurements: Array<Measurement>? = arrayOf(Measurement(null, "Duration", "duration", Duration.ofSeconds(30), null, true))
+    override var measurements: List<Measurement>? = listOf(Measurement("Duration", "duration", Duration.ofSeconds(30), null, true))
 }

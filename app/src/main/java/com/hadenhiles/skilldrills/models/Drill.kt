@@ -1,10 +1,21 @@
 package com.hadenhiles.skilldrills.models
 
-open class Drill(id: String, name: String, description: String, activity: Activity, category: String, drillType: DrillType) {
-    var id: String? = id
-    var name: String? = name
-    var description: String? = description
-    var activity: Activity? = activity
-    var category: String? = category
-    var drillType: DrillType? = drillType
+open class Drill {
+    var id: String? = null
+    var name: String? = null
+    var description: String? = null
+    var activity: Activity? = null
+    var category: String? = null
+    var drillType: DrillType? = null
+
+    constructor(){}
+
+    constructor(id: String, name: String, description: String, activity: Activity, category: String, drillType: DrillType) {
+        this.id = id
+        this.name = name
+        this.description = description
+        this.activity = activity
+        this.category = category
+        this.drillType = drillType
+    }
 }

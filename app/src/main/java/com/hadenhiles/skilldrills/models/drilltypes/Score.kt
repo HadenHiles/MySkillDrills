@@ -7,5 +7,5 @@ import java.time.Duration
 class Score: DrillType() {
     override var title: String? = "score"
     override var descriptor: String? = "Score out of 5, 10, 30, etc."
-    override var measurements: Array<Measurement>? = arrayOf(Measurement(null, "Score", "count", null, 10, false))
+    override var measurements: List<Measurement>? = listOf(Measurement("Score", "count", null, 10, false))
 }

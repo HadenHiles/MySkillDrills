@@ -7,5 +7,5 @@ import java.time.Duration
 class Duration: DrillType() {
     override var title: String? = "duration"
     override var descriptor: String? = "A timed drill"
-    override var measurements: Array<Measurement>? = arrayOf(Measurement(null, "Time", "duration", Duration.ofSeconds(0), Duration.ofSeconds(30), false))
+    override var measurements: List<Measurement>? = listOf(Measurement("Time", "duration", Duration.ofSeconds(0), Duration.ofSeconds(30), false))
 }
