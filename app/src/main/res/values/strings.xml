@@ -14,4 +14,7 @@
     <string name="add_drill_name_hint">Add Name</string>
     <string name="add_drill_description_hint">Add Drill Description</string>
     <string name="add_drill_fab_description">Add</string>
+    <string name="add_drill_activity_label">Activity:</string>
+    <string name="add_drill_category_label">Category:</string>
+    <string name="add_drill_type_label">Type:</string>
 </resources>
