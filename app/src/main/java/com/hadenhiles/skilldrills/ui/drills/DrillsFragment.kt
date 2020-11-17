@@ -1,6 +1,7 @@
 package com.hadenhiles.skilldrills.ui.drills
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -17,9 +18,11 @@ import com.google.firebase.firestore.Query
 import com.hadenhiles.skilldrills.AddDrillActivity
 import com.hadenhiles.skilldrills.LoginActivity
 import com.hadenhiles.skilldrills.R
+import com.hadenhiles.skilldrills.R.*
 import com.hadenhiles.skilldrills.models.Drill
 import kotlinx.android.synthetic.main.fragment_drills.*
 import kotlinx.android.synthetic.main.item_drill.view.*
+import kotlin.math.absoluteValue
 
 class DrillsFragment : Fragment() {
 
@@ -33,7 +36,7 @@ class DrillsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_drills, container, false)
+        return inflater.inflate(layout.fragment_drills, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -80,7 +83,7 @@ class DrillsFragment : Fragment() {
     private inner class DrillAdapter internal constructor(options: FirestoreRecyclerOptions<Drill>): FirestoreRecyclerAdapter<Drill, DrillViewHolder>(options) {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DrillViewHolder {
             // Inflate the item_restaurant.xml layout template to populate the recyclerview
-            val view = LayoutInflater.from(parent.context).inflate(R.layout.item_drill, parent, false)
+            val view = LayoutInflater.from(parent.context).inflate(layout.item_drill, parent, false)
 
             return DrillViewHolder(view)
         }
@@ -90,6 +93,10 @@ class DrillsFragment : Fragment() {
             holder.itemView.nameTextView.text = model.name
             holder.itemView.activityTextView.text = model.activity?.name
             holder.itemView.categoryTextView.text = model.category
+
+            if(position%2 != 0){
+                holder.itemView.setBackgroundColor(Color.parseColor("#f5f5f5"))
+            }
         }
 
     }
