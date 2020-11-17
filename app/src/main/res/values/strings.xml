@@ -18,4 +18,5 @@
     <string name="add_drill_category_label">Category:</string>
     <string name="add_drill_type_label">Type:</string>
     <string name="drills_add_drill_fab_description">Add Drill</string>
+    <string name="logout">Logout</string>
 </resources>
