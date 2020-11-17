@@ -1,5 +1,6 @@
 package com.hadenhiles.skilldrills.ui.profile
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.hadenhiles.skilldrills.LoginActivity
 import com.hadenhiles.skilldrills.R
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_profile.*
@@ -28,5 +30,11 @@ class ProfileFragment : Fragment() {
         displayName.text = FirebaseAuth.getInstance().currentUser?.displayName ?: "";
         val photoUrl = FirebaseAuth.getInstance().currentUser?.photoUrl;
         Picasso.get().load(photoUrl).into(profilePhoto)
+
+        logout.setOnClickListener {
+            FirebaseAuth.getInstance().signOut()
+            val intent = Intent(context?.applicationContext, LoginActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
