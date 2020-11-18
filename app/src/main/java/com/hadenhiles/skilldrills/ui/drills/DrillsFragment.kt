@@ -79,6 +79,11 @@ class DrillsFragment : Fragment() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        adapter!!.notifyDataSetChanged()
+    }
+
     private inner class DrillViewHolder internal constructor(private val view: View): RecyclerView.ViewHolder(view){}
     private inner class DrillAdapter internal constructor(options: FirestoreRecyclerOptions<Drill>): FirestoreRecyclerAdapter<Drill, DrillViewHolder>(options) {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DrillViewHolder {
@@ -94,7 +99,7 @@ class DrillsFragment : Fragment() {
             holder.itemView.activityTextView.text = model.activity?.name
             holder.itemView.categoryTextView.text = model.category
 
-            if(position%2 != 0){
+            if(position % 2 != 0){
                 holder.itemView.setBackgroundColor(Color.parseColor("#f5f5f5"))
             }
         }
