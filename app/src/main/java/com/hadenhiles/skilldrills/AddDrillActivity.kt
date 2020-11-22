@@ -39,7 +39,7 @@ class AddDrillActivity : AppCompatActivity() {
         activityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         activitySpinner.adapter = activityAdapter
 
-        // Populate activities dropdown
+        // Populate drill types dropdown
         val drillTypes: List<DrillType> = listOf(Duration(), DurationCountdown(), Score())
         val drillTypeAdapter: ArrayAdapter<DrillType> = ArrayAdapter<DrillType>(applicationContext, android.R.layout.simple_spinner_dropdown_item, drillTypes)
         drillTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)

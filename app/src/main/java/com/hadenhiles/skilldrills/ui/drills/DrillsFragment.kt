@@ -16,6 +16,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.hadenhiles.skilldrills.AddDrillActivity
+import com.hadenhiles.skilldrills.EditDrillActivity
 import com.hadenhiles.skilldrills.LoginActivity
 import com.hadenhiles.skilldrills.R
 import com.hadenhiles.skilldrills.R.*
@@ -101,6 +102,13 @@ class DrillsFragment : Fragment() {
 
             if(position % 2 != 0){
                 holder.itemView.setBackgroundColor(Color.parseColor("#f5f5f5"))
+            }
+
+            holder.itemView.setOnClickListener {
+                // Edit the drill
+                val intent = Intent(context, EditDrillActivity::class.java)
+                intent.putExtra("drillId", model.id)
+                startActivity(intent)
             }
         }
 
