@@ -56,35 +56,50 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="fill_horizontal"
                 android:text="@string/add_drill_activity_label"
-                android:textSize="14sp"/>
+                android:textColor="@android:color/darker_gray"
+                android:textSize="16sp" />
             <Spinner
                 android:id="@+id/activitySpinner"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
+                android:popupElevation="4dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="15dp"
                 android:layout_gravity="fill_horizontal"
+                android:backgroundTint="@color/primaryColor"
                 android:foregroundTint="@color/textColor" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="fill_horizontal"
                 android:text="@string/add_drill_category_label"
-                android:textSize="14sp"/>
+                android:textColor="@android:color/darker_gray"
+                android:textSize="16sp"/>
             <Spinner
                 android:id="@+id/categorySpinner"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
+                android:popupElevation="4dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="15dp"
                 android:layout_gravity="fill_horizontal"
+                android:backgroundTint="@color/primaryColor"
                 android:foregroundTint="@color/textColor" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="fill_horizontal"
                 android:text="@string/add_drill_type_label"
-                android:textSize="14sp"/>
+                android:textColor="@android:color/darker_gray"
+                android:textSize="16sp"/>
             <Spinner
                 android:id="@+id/drillTypeSpinner"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
+                android:popupElevation="4dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="15dp"
+                android:backgroundTint="@color/primaryColor"
                 android:layout_gravity="fill_horizontal"
                 android:foregroundTint="@color/textColor" />
         </LinearLayout>
