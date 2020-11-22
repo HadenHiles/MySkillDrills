@@ -19,4 +19,5 @@
     <string name="add_drill_type_label">Type:</string>
     <string name="drills_add_drill_fab_description">Add Drill</string>
     <string name="logout">Logout</string>
+    <string name="start_session_button">Start Session</string>
 </resources>
