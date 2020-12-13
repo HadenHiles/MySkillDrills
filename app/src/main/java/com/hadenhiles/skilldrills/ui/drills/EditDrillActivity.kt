@@ -1,4 +1,4 @@
-package com.hadenhiles.skilldrills
+package com.hadenhiles.skilldrills.ui.drills
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.hadenhiles.skilldrills.R
 import com.hadenhiles.skilldrills.models.Activity
 import com.hadenhiles.skilldrills.models.Drill
 import com.hadenhiles.skilldrills.models.DrillType

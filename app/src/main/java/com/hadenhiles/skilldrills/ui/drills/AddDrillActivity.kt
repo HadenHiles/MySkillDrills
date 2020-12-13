@@ -1,6 +1,5 @@
-package com.hadenhiles.skilldrills
+package com.hadenhiles.skilldrills.ui.drills
 
-import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
@@ -11,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.hadenhiles.skilldrills.R
 import com.hadenhiles.skilldrills.models.Activity
 import com.hadenhiles.skilldrills.models.Drill
 import com.hadenhiles.skilldrills.models.DrillType
@@ -21,7 +21,6 @@ import com.hadenhiles.skilldrills.models.drilltypes.Duration
 import com.hadenhiles.skilldrills.models.drilltypes.DurationCountdown
 import com.hadenhiles.skilldrills.models.drilltypes.Score
 import kotlinx.android.synthetic.main.activity_add_drill.*
-import kotlinx.android.synthetic.main.fragment_drills.*
 
 
 class AddDrillActivity : AppCompatActivity() {

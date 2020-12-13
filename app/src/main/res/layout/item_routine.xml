@@ -6,7 +6,6 @@
     android:layout_height="wrap_content"
     app:cardElevation="0dp">
     <LinearLayout
-        android:id="@+id/drillItem"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingStart="20dp"
@@ -28,24 +27,12 @@
                 android:layout_gravity="start"
                 android:textSize="18sp"
                 android:textStyle="bold" />
-            <TextView
-                android:id="@+id/activityTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingTop="5dp"
-                android:textSize="14sp" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="center_vertical|end"
-            android:layout_weight="1">
-            <TextView
-                android:id="@+id/categoryTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textStyle="italic" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/drillsRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false" />
         </LinearLayout>
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>
