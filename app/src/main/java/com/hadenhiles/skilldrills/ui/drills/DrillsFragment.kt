@@ -107,6 +107,5 @@ class DrillsFragment : Fragment() {
                 startActivity(intent)
             }
         }
-
     }
 }

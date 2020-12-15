@@ -1,8 +1,8 @@
 package com.hadenhiles.skilldrills.ui.routines
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.text.TextUtils
-import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.Toast
@@ -22,12 +22,6 @@ class AddRoutineActivity : AppCompatActivity() {
     private var user = FirebaseAuth.getInstance().currentUser
     private var userUid = user?.uid ?: ""
 
-    lateinit var drillsAdapter: ArrayAdapter<String>
-    lateinit var listView: ListView
-    lateinit var alertDialog: AlertDialog.Builder
-    lateinit var dialog: AlertDialog
-    var drills: List<String> = mutableListOf<String>()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_routine)
@@ -36,20 +30,37 @@ class AddRoutineActivity : AppCompatActivity() {
             finish()
         }
 
-        // query the db for all restaurants
-//        val drillsSnapshot = db.collection("drills").document(userUid).collection("drills").orderBy(
-//            "name",
-//            Query.Direction.ASCENDING
-//        ).get()
-//
-//
-//        for (drill in drillsSnapshot.result!!) {
-//            drills.toMutableList().add(drill.toObject(Drill::class.java).name.toString())
-//        }
-//
-//        addDrillButton.setOnClickListener {
-//            openDialog()
-//        }
+        addDrillButton.setOnClickListener {
+            val drillNames: MutableList<String> = ArrayList()
+            val drills: MutableList<Drill> = mutableListOf<Drill>()
+
+            // query the db for all drills
+            db.collection("drills").document(userUid).collection("drills").orderBy(
+                "name",
+                Query.Direction.ASCENDING
+            ).get()
+                .addOnSuccessListener { documents ->
+                    for (drill in documents) {
+                        drills.add(drill.toObject(Drill::class.java))
+                        drillNames.add(drill.toObject(Drill::class.java).name.toString())
+                    }
+
+                    //Create sequence of items
+                    val drillsList: Array<String> = drillNames.toTypedArray<String>()
+                    val dialogBuilder = AlertDialog.Builder(this)
+                    dialogBuilder.setTitle("Select a Drill")
+                    dialogBuilder.setItems(drillsList
+                    ) { dialogInterface, arg ->
+
+                    }
+
+                    //Create alert dialog object via builder
+                    val alertDialogObject = dialogBuilder.create()
+
+                    //Show the dialog
+                    alertDialogObject.show()
+                }
+        }
 
         saveRoutineButton.setOnClickListener {
             // gather fields
@@ -62,16 +73,16 @@ class AddRoutineActivity : AppCompatActivity() {
                 val user = FirebaseAuth.getInstance().currentUser
                 if (user != null) {
                     // capture inputs into an instance of the Drill class
-                    val drill = Routine()
-                    drill.name = name
-                    drill.note = note
+                    val routine = Routine()
+                    routine.name = name
+                    routine.note = note
 
                     // connect & save to Firebase
                     val db =
                         FirebaseFirestore.getInstance().collection("routines").document(user.uid)
                             .collection("routines")
-                    drill.id = db.document().id
-                    db.document(drill.id!!).set(drill)
+                    routine.id = db.document().id
+                    db.document(routine.id!!).set(routine)
 
                     // Let the user know it worked
                     Toast.makeText(this, "Routine created", Toast.LENGTH_SHORT).show()
@@ -91,22 +102,5 @@ class AddRoutineActivity : AppCompatActivity() {
                     .show()
             }
         }
-    }
-
-
-    fun openDialog() {
-        alertDialog = AlertDialog.Builder(this)
-        val rowList: View = layoutInflater.inflate(R.layout.fragment_drills, null)
-        listView = rowList.findViewById(R.id.drillItem)
-        drillsAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, drills)
-        listView.adapter = drillsAdapter
-        drillsAdapter.notifyDataSetChanged()
-        alertDialog.setView(rowList)
-        dialog = alertDialog.create()
-        dialog.show()
-    }
-    fun closeDialog(view: View) {
-        dialog.dismiss()
-        Toast.makeText(baseContext, "Dialog Closed", Toast.LENGTH_SHORT).show()
     }
 }
