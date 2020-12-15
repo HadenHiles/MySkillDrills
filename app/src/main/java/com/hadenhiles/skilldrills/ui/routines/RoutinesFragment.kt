@@ -50,7 +50,7 @@ class RoutinesFragment : Fragment() {
         routinesRecyclerView.adapter = adapter
 
         addRoutineButton.setOnClickListener {
-            val intent = Intent(context?.applicationContext, AddRoutineActivity::class.java)
+            val intent = Intent(context?.applicationContext, RoutineActivity::class.java)
             startActivity(intent)
         }
     }
@@ -97,12 +97,12 @@ class RoutinesFragment : Fragment() {
                 holder.itemView.setBackgroundColor(Color.parseColor("#f5f5f5"))
             }
 
-//            holder.itemView.setOnClickListener {
-//                // Edit the routine
-//                val intent = Intent(context, EditRoutineActivity::class.java)
-//                intent.putExtra("routineId", model.id)
-//                startActivity(intent)
-//            }
+            holder.itemView.setOnClickListener {
+                // Edit the routine
+                val intent = Intent(context?.applicationContext, RoutineActivity::class.java)
+                intent.putExtra("id", model.id)
+                startActivity(intent)
+            }
         }
 
     }
