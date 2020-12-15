@@ -5,6 +5,7 @@ import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -12,48 +13,47 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.hadenhiles.skilldrills.R
 import com.hadenhiles.skilldrills.models.Drill
 import com.hadenhiles.skilldrills.models.Routine
 import kotlinx.android.synthetic.main.activity_add_routine.*
-import kotlinx.android.synthetic.main.activity_add_routine.addDrillButton
-import kotlinx.android.synthetic.main.activity_add_routine.drillsRecyclerView
 
 
 class RoutineActivity : AppCompatActivity() {
     val db = FirebaseFirestore.getInstance()
     private var user = FirebaseAuth.getInstance().currentUser
     private var userUid = user?.uid ?: ""
-    private var id: String? = null
+    var routineId: String? = null
 
     // Initialize our adapter for the routine drills recycler
     private lateinit var drillsAdapter: DrillsAdapter
+    private var selectedDrills: MutableList<Drill> = mutableListOf<Drill>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_routine)
 
         // Get the routine id if passed so we can populate the routine data
-        id = intent.getStringExtra("id")
+        routineId = intent.getStringExtra("id")
 
         drillsRecyclerView.layoutManager = LinearLayoutManager(applicationContext)
-        val selectedDrills: MutableList<Drill> = mutableListOf<Drill>()
         drillsAdapter = DrillsAdapter(selectedDrills)
         drillsRecyclerView.adapter = drillsAdapter
 
-        if (!id.isNullOrEmpty()) {
+        if (!routineId.isNullOrEmpty()) {
             // Populate the routine's data and drills from Firestore
             db.collection("routines").document(userUid).collection("routines")
-                .whereEqualTo("id", id)
+                .whereEqualTo("id", routineId)
                 .get()
                 .addOnSuccessListener { documents ->
                     for (document in documents) {
                         // Unpack the routine into our Routine model class
                         val routine = document.toObject(Routine::class.java)
                         // Set the name, notes, etc.
-                        addRoutineToolbar.title = routine.name
+                        routineToolbar.title = routine.name
                         routineName.setText(routine.name)
                         routineNote.setText(routine.note)
 
@@ -65,9 +65,12 @@ class RoutineActivity : AppCompatActivity() {
                 .addOnFailureListener { exception ->
                     println("Error getting documents: $exception")
                 }
+        } else {
+            // Hide the delete button
+            routineToolbar.menu.findItem(R.id.delete).isVisible = false
         }
 
-        addRoutineToolbar.setNavigationOnClickListener {
+        routineToolbar.setNavigationOnClickListener {
             finish()
         }
 
@@ -123,7 +126,7 @@ class RoutineActivity : AppCompatActivity() {
                     val db =
                         FirebaseFirestore.getInstance().collection("routines").document(user.uid)
                             .collection("routines")
-                    routine.id = id?: db.document().id
+                    routine.id = routineId?: db.document().id
                     db.document(routine.id!!).set(routine)
 
                     // Let the user know it worked
@@ -144,6 +147,25 @@ class RoutineActivity : AppCompatActivity() {
                     .show()
             }
         }
+
+        if (!routineId.isNullOrEmpty()) {
+            routineToolbar.setOnMenuItemClickListener { menuItem ->
+                when (menuItem.itemId) {
+                    R.id.delete -> {
+                        // Handle delete icon press
+                        val routineReference: DocumentReference =
+                            db.collection("routines").document(userUid)
+                                .collection("routines").document(routineId!!)
+                        routineReference.delete().addOnSuccessListener { aVoid: Void? ->
+                            Toast.makeText(this, "Routine deleted", Toast.LENGTH_SHORT).show()
+                        }
+                        finish()
+                        true
+                    }
+                    else -> false
+                }
+            }
+        }
     }
 
 
@@ -158,6 +180,7 @@ class RoutineActivity : AppCompatActivity() {
             val nameTextView: TextView = view.findViewById(R.id.nameTextView)
             val activityTextView: TextView = view.findViewById(R.id.activityTextView)
             val categoryTextView: TextView = view.findViewById(R.id.categoryTextView)
+            val removeDrillButton: ImageButton = view.findViewById(R.id.removeDrillButton)
         }
 
         // Create new views (invoked by the layout manager)
@@ -177,6 +200,12 @@ class RoutineActivity : AppCompatActivity() {
             viewHolder.nameTextView.text = dataSet[position].name
             viewHolder.activityTextView.text = dataSet[position].activity?.name
             viewHolder.categoryTextView.text = dataSet[position].category
+
+            viewHolder.removeDrillButton.setOnClickListener {
+                selectedDrills.remove(dataSet[position])
+                notifyItemRemoved(position)
+                notifyItemRangeChanged(position, selectedDrills.count())
+            }
         }
 
         // Return the size of your dataset (invoked by the layout manager)

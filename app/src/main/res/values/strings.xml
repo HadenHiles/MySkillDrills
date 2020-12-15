@@ -24,4 +24,6 @@
     <string name="add_routine_note">Note</string>
     <string name="save_routine_button_description">Save Routine</string>
     <string name="routine_add_drill_button">Add Drill</string>
+    <string name="routine_delete_item_title">Delete</string>
+    <string name="remove_drill_button_content_description">Remove drill button</string>
 </resources>

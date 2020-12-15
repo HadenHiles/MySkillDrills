@@ -17,6 +17,7 @@ import com.google.firebase.firestore.Query
 import com.hadenhiles.skilldrills.R.*
 import com.hadenhiles.skilldrills.models.Drill
 import kotlinx.android.synthetic.main.fragment_drills.*
+import kotlinx.android.synthetic.main.item_drill.*
 import kotlinx.android.synthetic.main.item_drill.view.*
 
 class DrillsFragment : Fragment() {
@@ -105,6 +106,10 @@ class DrillsFragment : Fragment() {
                 val intent = Intent(context, EditDrillActivity::class.java)
                 intent.putExtra("drillId", model.id)
                 startActivity(intent)
+            }
+
+            holder.itemView.removeDrillButton.setOnClickListener {
+//                db.collection("drills").document(userUid).collection("drills").document(model.id)
             }
         }
     }

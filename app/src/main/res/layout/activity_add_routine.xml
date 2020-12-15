@@ -12,10 +12,11 @@
         android:layout_height="wrap_content">
 
         <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/addRoutineToolbar"
+            android:id="@+id/routineToolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:navigationIcon="@drawable/ic_baseline_close_24"
+            app:menu="@menu/routine_top_menu_bar"
             app:title="Create Routine" />
 
     </com.google.android.material.appbar.AppBarLayout>
