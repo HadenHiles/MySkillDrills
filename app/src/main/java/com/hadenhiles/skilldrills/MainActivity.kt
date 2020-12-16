@@ -2,7 +2,6 @@ package com.hadenhiles.skilldrills
 
 import android.os.Bundle
 import android.view.View
-import android.widget.LinearLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -11,8 +10,6 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_main.view.*
-import kotlinx.android.synthetic.main.fragment_start.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -37,9 +34,9 @@ class MainActivity : AppCompatActivity() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
                 // Do something for new state
                 if (sessionBottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED) {
-                    closeSessionBottomSheetButton.alpha = 1F
+                    toggleSessionBottomSheetButton.setImageResource(R.drawable.ic_baseline_keyboard_arrow_down_black_32)
                 } else {
-                    closeSessionBottomSheetButton.alpha = 0f
+                    toggleSessionBottomSheetButton.setImageResource(R.drawable.ic_baseline_keyboard_arrow_up_black_32)
                 }
             }
 
@@ -48,7 +45,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // Assign the bottomsheet callback to the behaviour callback handler
+        // Assign the bottom sheet callback to the behaviour callback handler
         sessionBottomSheetBehavior.addBottomSheetCallback(bottomSheetCallback)
 
         sessionBottomSheet.setOnClickListener {
@@ -58,10 +55,14 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Close the bottom sheet when the user clicks the close button
-        closeSessionBottomSheetButton.setOnClickListener {
-            sessionBottomSheetBehavior.peekHeight = 200
-            navigationContainer.setPadding(0, 0, 0, 200)
-            sessionBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+        toggleSessionBottomSheetButton.setOnClickListener {
+            if (sessionBottomSheetBehavior.state == BottomSheetBehavior.STATE_COLLAPSED) {
+                sessionBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+            } else {
+                sessionBottomSheetBehavior.peekHeight = 200
+                navigationContainer.setPadding(0, 0, 0, 200)
+                sessionBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+            }
         }
     }
 }

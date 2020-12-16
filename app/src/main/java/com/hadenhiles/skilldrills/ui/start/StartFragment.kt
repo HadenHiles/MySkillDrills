@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Chronometer
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.hadenhiles.skilldrills.R
@@ -25,6 +26,11 @@ class StartFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         startSessionButton.setOnClickListener {
+            // Start the session
+            val sessionTimer = requireActivity().findViewById<Chronometer>(R.id.sessionTimer)
+            sessionTimer.start()
+
+            // Reveal the session bottom sheet (peek)
             val mainContainer = requireActivity().findViewById<View>(R.id.mainContainer)
             val sessionBottomSheetBehaviour = BottomSheetBehavior.from(mainContainer.sessionBottomSheet)
             sessionBottomSheetBehaviour.peekHeight = 200

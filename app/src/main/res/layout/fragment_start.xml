@@ -14,5 +14,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="20dp"
-        android:text="@string/start_session_button" />
+        android:text="@string/start_empty_session_button" />
 </androidx.constraintlayout.widget.ConstraintLayout>

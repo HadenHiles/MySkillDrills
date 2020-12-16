@@ -19,11 +19,12 @@
     <string name="add_drill_type_label">Type:</string>
     <string name="drills_add_drill_fab_description">Add Drill</string>
     <string name="logout">Logout</string>
-    <string name="start_session_button">Start Session</string>
+    <string name="start_empty_session_button">Start Empty Session</string>
     <string name="add_routine_name">Name</string>
     <string name="add_routine_note">Note</string>
     <string name="save_routine_button_description">Save Routine</string>
     <string name="routine_add_drill_button">Add Drill</string>
     <string name="routine_delete_item_title">Delete</string>
     <string name="remove_drill_button_content_description">Remove drill button</string>
+    <string name="default_empty_session_title">Empty Session</string>
 </resources>

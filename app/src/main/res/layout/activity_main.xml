@@ -15,16 +15,58 @@
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
         app:behavior_peekHeight="0dp"
         android:elevation="10dp">
-        <ImageButton
-            android:id="@+id/closeSessionBottomSheetButton"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:backgroundTint="@android:color/transparent"
-            android:tint="@color/textColor"
-            android:alpha="0"
-            android:src="@drawable/ic_baseline_close_24" />
+            android:layout_gravity="fill_horizontal"
+            android:orientation="vertical"
+            android:gravity="start">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="10dp"
+                android:paddingStart="5dp"
+                android:paddingEnd="0dp"
+                android:layout_gravity="fill_horizontal"
+                android:gravity="center">
+                <Chronometer
+                    android:id="@+id/sessionTimer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:paddingTop="5dp"
+                    android:layout_weight="1"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textColor="@color/textColor"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/sessionTitleTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingTop="10dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="3"
+                    android:textSize="18sp"
+                    android:textColor="@color/textColor"
+                    android:textStyle="bold"
+                    android:text="@string/default_empty_session_title" />
+
+                <ImageButton
+                    android:id="@+id/toggleSessionBottomSheetButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_weight="1"
+                    android:backgroundTint="@android:color/transparent"
+                    android:foregroundTint="@color/textColor"
+                    android:src="@drawable/ic_baseline_keyboard_arrow_down_black_32"
+                    android:tint="@color/textColor" />
+            </LinearLayout>
+        </LinearLayout>
     </RelativeLayout>
     <LinearLayout
         android:layout_width="match_parent"
