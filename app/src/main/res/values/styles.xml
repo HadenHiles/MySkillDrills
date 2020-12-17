@@ -47,4 +47,8 @@
     <style name="TextAppearance.App.CollapsingToolbar.Expanded" parent="TextAppearance.MaterialComponents.Headline5">
         <item name="android:textColor">?attr/colorOnPrimary</item>
     </style>
+
+    <style name="AlertDialog" parent="Theme.MaterialComponents.DayNight.Dialog">
+        <item name="android:textColor">@color/textColor</item>
+    </style>
 </resources>

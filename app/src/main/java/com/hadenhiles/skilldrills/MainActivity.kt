@@ -1,6 +1,7 @@
 package com.hadenhiles.skilldrills
 
 import android.os.Bundle
+import android.os.SystemClock
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,6 +33,7 @@ class MainActivity : AppCompatActivity() {
     private var adapter: DrillsAdapter? = null
     private var user = FirebaseAuth.getInstance().currentUser
     private var userUid = user?.uid?: ""
+    private var sessionTimerRunning: Boolean = false
 
     // Initialize our adapter for the routine drills recycler
     private lateinit var drillsAdapter: DrillsAdapter
@@ -131,23 +133,31 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun startSession(routineId: String? = null) {
+        val sessionBottomSheetBehaviour = BottomSheetBehavior.from(mainContainer.sessionBottomSheet)
+        sessionBottomSheetBehaviour.peekHeight = 200
+        mainContainer.navigationContainer.setPadding(0, 0, 0, 200)
+
         // Check if there is an existing session or not
-        if (sessionTimer.isActivated) {
+        if (sessionTimerRunning) {
             // Ask the user if they would like to override the existing session with a new one
-            val builder = AlertDialog.Builder(this)
-            builder.setMessage("Are you sure you want to override your session?")
-                .setCancelable(false)
+            val builder = AlertDialog.Builder(this, R.style.AlertDialog)
+            builder.setMessage("Override your current session?")
+                .setCancelable(true)
                 .setPositiveButton("Yes") { dialog, id ->
                     // Setup the session with the selected routine data if routine id is provided
                     if (!routineId.isNullOrEmpty()) {
                         loadRoutineDrills(routineId)
                     }
 
-                    // Start the session
-                    sessionTimer?.stop()
-                    sessionTimer?.start()
+                    // Restart the session
+                    sessionTimer.base = SystemClock.elapsedRealtime()
+                    sessionTimer.stop()
+                    sessionTimer.start()
+
+                    // Reveal the bottom sheet
+                    sessionBottomSheetBehaviour.state = BottomSheetBehavior.STATE_EXPANDED
                 }
-                .setNegativeButton("No") { dialog, id ->
+                .setNegativeButton("Cancel") { dialog, id ->
                     // Dismiss the dialog
                     dialog.dismiss()
                 }
@@ -159,17 +169,17 @@ class MainActivity : AppCompatActivity() {
             }
 
             // Start the session
-            sessionTimer?.start()
-        }
+            sessionTimer.base = SystemClock.elapsedRealtime()
+            sessionTimer.stop()
+            sessionTimer.start()
+            sessionTimerRunning = true
 
-        // Reveal the bottom sheet (peek)
-        val sessionBottomSheetBehaviour = BottomSheetBehavior.from(mainContainer.sessionBottomSheet)
-        sessionBottomSheetBehaviour.peekHeight = 200
-        mainContainer.navigationContainer.setPadding(0, 0, 0, 200)
-        sessionBottomSheetBehaviour.state = BottomSheetBehavior.STATE_EXPANDED
+            // Reveal the bottom sheet
+            sessionBottomSheetBehaviour.state = BottomSheetBehavior.STATE_EXPANDED
+        }
     }
 
-    fun loadRoutineDrills(routineId: String) {
+    private fun loadRoutineDrills(routineId: String) {
         // Populate our session with the routine's drills from Firestore
         db.collection("routines").document(userUid).collection("routines")
             .whereEqualTo("id", routineId)
