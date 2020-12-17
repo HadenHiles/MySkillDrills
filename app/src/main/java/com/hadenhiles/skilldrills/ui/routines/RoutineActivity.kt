@@ -19,7 +19,7 @@ import com.google.firebase.firestore.Query
 import com.hadenhiles.skilldrills.R
 import com.hadenhiles.skilldrills.models.Drill
 import com.hadenhiles.skilldrills.models.Routine
-import kotlinx.android.synthetic.main.activity_add_routine.*
+import kotlinx.android.synthetic.main.activity_routine.*
 
 
 class RoutineActivity : AppCompatActivity() {
@@ -34,7 +34,7 @@ class RoutineActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_add_routine)
+        setContentView(R.layout.activity_routine)
 
         // Get the routine id if passed so we can populate the routine data
         routineId = intent.getStringExtra("id")

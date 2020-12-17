@@ -66,6 +66,28 @@
                     android:src="@drawable/ic_baseline_keyboard_arrow_down_black_32"
                     android:tint="@color/textColor" />
             </LinearLayout>
+
+            <EditText
+                android:id="@+id/sessionNoteEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="fill_horizontal"
+                android:hint="@string/add_routine_note"
+                android:inputType="textMultiLine"
+                android:lines="3"
+                android:maxLines="4"
+                android:textColor="@color/textColor" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/sessionDrillsRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/addSessionDrillButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/routine_add_drill_button" />
         </LinearLayout>
     </RelativeLayout>
     <LinearLayout

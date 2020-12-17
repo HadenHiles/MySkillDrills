@@ -62,13 +62,6 @@ class RoutinesFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         adapter!!.startListening()
-
-        // check if the user is signed in (optional but good to know)
-        val user = FirebaseAuth.getInstance().currentUser
-        if (user == null) {
-            val intent = Intent(context?.applicationContext, LoginActivity::class.java)
-            startActivity(intent)
-        }
     }
 
     override fun onStop() {

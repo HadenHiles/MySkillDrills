@@ -1,17 +1,41 @@
 package com.hadenhiles.skilldrills
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageButton
+import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
+import com.hadenhiles.skilldrills.models.Drill
+import com.hadenhiles.skilldrills.models.Routine
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.view.*
+import kotlinx.android.synthetic.main.activity_routine.*
 
 class MainActivity : AppCompatActivity() {
+
+    // connect to Firestore
+    val db = FirebaseFirestore.getInstance()
+    private var adapter: DrillsAdapter? = null
+    private var user = FirebaseAuth.getInstance().currentUser
+    private var userUid = user?.uid?: ""
+
+    // Initialize our adapter for the routine drills recycler
+    private lateinit var drillsAdapter: DrillsAdapter
+    private var sessionDrills: MutableList<Drill> = mutableListOf<Drill>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,6 +43,7 @@ class MainActivity : AppCompatActivity() {
 
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
         val navController = findNavController(R.id.nav_host_fragment)
+
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(setOf(
@@ -48,6 +73,11 @@ class MainActivity : AppCompatActivity() {
         // Assign the bottom sheet callback to the behaviour callback handler
         sessionBottomSheetBehavior.addBottomSheetCallback(bottomSheetCallback)
 
+        // Initialize the empty session drills recycler
+        sessionDrillsRecyclerView.layoutManager = LinearLayoutManager(applicationContext)
+        drillsAdapter = DrillsAdapter(sessionDrills)
+        sessionDrillsRecyclerView.adapter = drillsAdapter
+
         sessionBottomSheet.setOnClickListener {
             if (sessionBottomSheetBehavior.state == BottomSheetBehavior.STATE_COLLAPSED) {
                 sessionBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
@@ -64,5 +94,147 @@ class MainActivity : AppCompatActivity() {
                 sessionBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
             }
         }
+
+        addSessionDrillButton.setOnClickListener {
+            val drillNames: MutableList<String> = ArrayList()
+            val drills: MutableList<Drill> = mutableListOf<Drill>()
+
+            // query the db for all drills
+            db.collection("drills").document(userUid).collection("drills").orderBy(
+                "name",
+                Query.Direction.ASCENDING
+            ).get()
+                .addOnSuccessListener { documents ->
+                    for (drill in documents) {
+                        drills.add(drill.toObject(Drill::class.java))
+                        drillNames.add(drill.toObject(Drill::class.java).name.toString())
+                    }
+
+                    //Create sequence of items
+                    val drillsList: Array<String> = drillNames.toTypedArray<String>()
+                    val dialogBuilder = AlertDialog.Builder(this)
+                    dialogBuilder.setTitle("Select a Drill")
+                    dialogBuilder.setItems(
+                        drillsList
+                    ) { dialogInterface, item ->
+                        sessionDrills.add(drills[item])
+                        drillsAdapter.notifyDataSetChanged()
+                    }
+
+                    //Create alert dialog object via builder
+                    val alertDialogObject = dialogBuilder.create()
+
+                    //Show the dialog
+                    alertDialogObject.show()
+                }
+        }
+    }
+
+    fun startSession(routineId: String? = null) {
+        // Check if there is an existing session or not
+        if (sessionTimer.isActivated) {
+            // Ask the user if they would like to override the existing session with a new one
+            val builder = AlertDialog.Builder(this)
+            builder.setMessage("Are you sure you want to override your session?")
+                .setCancelable(false)
+                .setPositiveButton("Yes") { dialog, id ->
+                    // Setup the session with the selected routine data if routine id is provided
+                    if (!routineId.isNullOrEmpty()) {
+                        loadRoutineDrills(routineId)
+                    }
+
+                    // Start the session
+                    sessionTimer?.stop()
+                    sessionTimer?.start()
+                }
+                .setNegativeButton("No") { dialog, id ->
+                    // Dismiss the dialog
+                    dialog.dismiss()
+                }
+            val alert = builder.create()
+            alert.show()
+        } else {
+            if (!routineId.isNullOrEmpty()) {
+                loadRoutineDrills(routineId)
+            }
+
+            // Start the session
+            sessionTimer?.start()
+        }
+
+        // Reveal the bottom sheet (peek)
+        val sessionBottomSheetBehaviour = BottomSheetBehavior.from(mainContainer.sessionBottomSheet)
+        sessionBottomSheetBehaviour.peekHeight = 200
+        mainContainer.navigationContainer.setPadding(0, 0, 0, 200)
+        sessionBottomSheetBehaviour.state = BottomSheetBehavior.STATE_EXPANDED
+    }
+
+    fun loadRoutineDrills(routineId: String) {
+        // Populate our session with the routine's drills from Firestore
+        db.collection("routines").document(userUid).collection("routines")
+            .whereEqualTo("id", routineId)
+            .get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    // Unpack the routine into our Routine model class
+                    val routine = document.toObject(Routine::class.java)
+
+                    // Set the session title/note to the routine name/note
+                    sessionTitleTextView.text = routine.name
+                    sessionNoteEditText.setText(routine.note)
+
+                    // Update the list of session drills and tell our adapter that we've updated it's data
+                    sessionDrills.addAll(routine.drills)
+                    drillsAdapter.notifyDataSetChanged()
+                }
+            }
+            .addOnFailureListener { exception ->
+                println("Error getting documents: $exception")
+            }
+    }
+
+    // For populating the session drills recycler view
+    private inner class DrillsAdapter(private val dataSet: List<Drill>) :
+        RecyclerView.Adapter<DrillsAdapter.ViewHolder>() {
+
+        /**
+         * Provide a reference to the type of views that you are using
+         * (custom ViewHolder).
+         */
+        inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+            val nameTextView: TextView = view.findViewById(R.id.nameTextView)
+            val activityTextView: TextView = view.findViewById(R.id.activityTextView)
+            val categoryTextView: TextView = view.findViewById(R.id.categoryTextView)
+            val removeDrillButton: ImageButton = view.findViewById(R.id.removeDrillButton)
+        }
+
+        // Create new views (invoked by the layout manager)
+        override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
+            // Create a new view, which defines the UI of the list item
+            val view = LayoutInflater.from(viewGroup.context)
+                .inflate(R.layout.item_drill, viewGroup, false)
+
+            return ViewHolder(view)
+        }
+
+        // Replace the contents of a view (invoked by the layout manager)
+        override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+
+            // Get element from your dataset at this position and replace the
+            // contents of the view with that element
+            viewHolder.nameTextView.text = dataSet[position].name
+            viewHolder.activityTextView.text = dataSet[position].activity?.name
+            viewHolder.categoryTextView.text = dataSet[position].category
+
+            viewHolder.removeDrillButton.setOnClickListener {
+                sessionDrills.remove(dataSet[position])
+                notifyItemRemoved(position)
+                notifyItemRangeChanged(position, sessionDrills.count())
+            }
+        }
+
+        // Return the size of your dataset (invoked by the layout manager)
+        override fun getItemCount() = dataSet.size
+
     }
 }
