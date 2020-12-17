@@ -64,3 +64,4 @@ local.properties
 buildSrcTmp/
 distTmp/
 outTmp/
+app/release
