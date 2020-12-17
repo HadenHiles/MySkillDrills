@@ -144,6 +144,13 @@ class MainActivity : AppCompatActivity() {
             builder.setMessage("Override your current session?")
                 .setCancelable(true)
                 .setPositiveButton("Yes") { dialog, id ->
+                    // Reset the session title and note
+                    sessionTitleTextView.text = getString(R.string.default_empty_session_title)
+                    sessionNoteEditText.setText("")
+
+                    // Empty the current drills
+                    sessionDrills.removeAll(sessionDrills)
+
                     // Setup the session with the selected routine data if routine id is provided
                     if (!routineId.isNullOrEmpty()) {
                         loadRoutineDrills(routineId)
