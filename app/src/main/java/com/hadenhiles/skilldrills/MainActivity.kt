@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
@@ -22,9 +23,13 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.hadenhiles.skilldrills.models.Drill
 import com.hadenhiles.skilldrills.models.Routine
+import com.hadenhiles.skilldrills.models.Session
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main.view.*
 import kotlinx.android.synthetic.main.activity_routine.*
+import java.time.Duration
+import java.time.temporal.TemporalUnit
+import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
 
@@ -97,6 +102,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        // Add a click handler for the session add drill button
         addSessionDrillButton.setOnClickListener {
             val drillNames: MutableList<String> = ArrayList()
             val drills: MutableList<Drill> = mutableListOf<Drill>()
@@ -130,9 +136,84 @@ class MainActivity : AppCompatActivity() {
                     alertDialogObject.show()
                 }
         }
+
+        // Allow the user to finish a session - give them the option to save or discard (for history and potentially give option to update original routine values as well)
+        finishButton.setOnClickListener {
+            // setup reference to the bottom sheet
+            val sessionBottomSheetBehaviour = BottomSheetBehavior.from(mainContainer.sessionBottomSheet)
+            sessionBottomSheetBehaviour.peekHeight = 200
+            mainContainer.navigationContainer.setPadding(0, 0, 0, 200)
+
+            val builder = AlertDialog.Builder(this, R.style.AlertDialog)
+            builder.setMessage("Would you like to save this session?")
+                .setCancelable(true)
+                .setPositiveButton("Save") { dialog, id ->
+                    // Save the session to firestore
+                    if (user != null) {
+                        // capture inputs into an instance of the Drill class
+                        val session = Session()
+                        // Update the routine properties with the new data
+                        session.name = sessionTitleTextView.text.toString().trim()
+                        session.note = sessionNoteEditText.text.toString().trim()
+                        session.drills = sessionDrills
+                        session.duration = Duration.ofMillis(SystemClock.elapsedRealtime() - sessionTimer.base)
+
+                        // connect & save to Firebase
+                        val db = FirebaseFirestore.getInstance().collection("sessions").document(userUid)
+                                .collection("sessions")
+                        session.id = db.document().id
+                        db.document(session.id!!).set(session)
+
+                        // Reset the session bottom sheet content
+                        sessionTitleTextView.text = getString(R.string.default_empty_session_title)
+                        sessionNoteEditText.setText("")
+                        sessionDrills.removeAll(sessionDrills)
+                        drillsAdapter.notifyDataSetChanged()
+
+                        // Close the session
+                        sessionTimer.base = SystemClock.elapsedRealtime()
+                        sessionTimer.stop()
+                        sessionTimerRunning = false
+
+                        // Hide the bottom sheet
+                        sessionBottomSheetBehaviour.peekHeight = 0
+                        mainContainer.navigationContainer.setPadding(0, 0, 0, 0)
+                        sessionBottomSheetBehaviour.state = BottomSheetBehavior.STATE_COLLAPSED
+
+                        // Let the user know it worked
+                        Toast.makeText(this, "Session saved to history", Toast.LENGTH_SHORT).show()
+                    } else {
+                        // Let the user know it didn't work
+                        Toast.makeText(this, "Failed to save session", Toast.LENGTH_SHORT).show()
+                    }
+                }
+                .setNegativeButton("Discard") { dialog, id ->
+                    // Dismiss the dialog
+                    dialog.dismiss()
+
+                    // Reset the session bottom sheet content
+                    sessionTitleTextView.text = getString(R.string.default_empty_session_title)
+                    sessionNoteEditText.setText("")
+                    sessionDrills.removeAll(sessionDrills)
+                    drillsAdapter.notifyDataSetChanged()
+
+                    // Close the session
+                    sessionTimer.base = SystemClock.elapsedRealtime()
+                    sessionTimer.stop()
+                    sessionTimerRunning = false
+
+                    // Hide the bottom sheet
+                    sessionBottomSheetBehaviour.peekHeight = 0
+                    mainContainer.navigationContainer.setPadding(0, 0, 0, 0)
+                    sessionBottomSheetBehaviour.state = BottomSheetBehavior.STATE_COLLAPSED
+                }
+            val alert = builder.create()
+            alert.show()
+        }
     }
 
     fun startSession(routineId: String? = null) {
+        // setup reference to the bottom sheet
         val sessionBottomSheetBehaviour = BottomSheetBehavior.from(mainContainer.sessionBottomSheet)
         sessionBottomSheetBehaviour.peekHeight = 200
         mainContainer.navigationContainer.setPadding(0, 0, 0, 200)

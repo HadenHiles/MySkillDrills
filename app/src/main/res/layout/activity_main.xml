@@ -8,87 +8,108 @@
         android:id="@+id/sessionBottomSheet"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingHorizontal="5dp"
         android:paddingTop="0dp"
         android:paddingBottom="@dimen/bottomNavigationHeight"
         android:background="?android:attr/windowBackground"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
         app:behavior_peekHeight="0dp"
         android:elevation="10dp">
-        <LinearLayout
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="fill_horizontal"
-            android:orientation="vertical"
-            android:gravity="start">
+            android:layout_height="match_parent">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingTop="10dp"
-                android:paddingStart="5dp"
-                android:paddingEnd="0dp"
                 android:layout_gravity="fill_horizontal"
-                android:gravity="center">
-                <Chronometer
-                    android:id="@+id/sessionTimer"
-                    android:layout_width="wrap_content"
+                android:orientation="vertical"
+                android:gravity="start">
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="start"
-                    android:paddingTop="5dp"
-                    android:layout_weight="1"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                    android:textColor="@color/textColor"
-                    android:textSize="24sp" />
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:background="@color/white2"
+                    android:layout_gravity="fill_horizontal"
+                    android:gravity="center">
+                    <Chronometer
+                        android:id="@+id/sessionTimer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:paddingTop="5dp"
+                        android:layout_weight="1"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                        android:textColor="@color/textColor"
+                        android:textSize="24sp" />
 
-                <TextView
-                    android:id="@+id/sessionTitleTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:paddingTop="10dp"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginEnd="5dp"
-                    android:layout_weight="3"
-                    android:textSize="18sp"
-                    android:textColor="@color/textColor"
-                    android:textStyle="bold"
-                    android:text="@string/default_empty_session_title" />
+                    <TextView
+                        android:id="@+id/sessionTitleTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:paddingTop="10dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="3"
+                        android:textSize="18sp"
+                        android:textColor="@color/textColor"
+                        android:textStyle="bold"
+                        android:text="@string/default_empty_session_title" />
 
-                <ImageButton
-                    android:id="@+id/toggleSessionBottomSheetButton"
-                    android:layout_width="wrap_content"
+                    <ImageButton
+                        android:id="@+id/toggleSessionBottomSheetButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_weight="1"
+                        android:backgroundTint="@android:color/transparent"
+                        android:foregroundTint="@color/textColor"
+                        android:src="@drawable/ic_baseline_keyboard_arrow_down_black_32"
+                        android:tint="@color/textColor" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:layout_weight="1"
-                    android:backgroundTint="@android:color/transparent"
-                    android:foregroundTint="@color/textColor"
-                    android:src="@drawable/ic_baseline_keyboard_arrow_down_black_32"
-                    android:tint="@color/textColor" />
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:background="@color/white"
+                    android:layout_gravity="fill_horizontal"
+                    android:gravity="center_vertical|end">
+                    <EditText
+                        android:id="@+id/sessionNoteEditText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="4"
+                        android:layout_gravity="start"
+                        android:layout_marginHorizontal="5dp"
+                        android:hint="@string/add_routine_note"
+                        android:inputType="textMultiLine"
+                        android:lines="3"
+                        android:maxLines="4"
+                        android:textColor="@color/textColor" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/finishButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/primaryColor"
+                        android:textColor="@color/primaryTextColor"
+                        android:text="@string/finish_button_text" />
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/sessionDrillsRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false" />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/addSessionDrillButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="5dp"
+                    android:text="@string/routine_add_drill_button" />
             </LinearLayout>
-
-            <EditText
-                android:id="@+id/sessionNoteEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="fill_horizontal"
-                android:hint="@string/add_routine_note"
-                android:inputType="textMultiLine"
-                android:lines="3"
-                android:maxLines="4"
-                android:textColor="@color/textColor" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/sessionDrillsRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clipToPadding="false" />
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/addSessionDrillButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/routine_add_drill_button" />
-        </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
     </RelativeLayout>
     <LinearLayout
         android:layout_width="match_parent"
