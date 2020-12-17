@@ -156,7 +156,7 @@ class MainActivity : AppCompatActivity() {
                         session.name = sessionTitleTextView.text.toString().trim()
                         session.note = sessionNoteEditText.text.toString().trim()
                         session.drills = sessionDrills
-                        session.duration = Duration.ofMillis(SystemClock.elapsedRealtime() - sessionTimer.base)
+                        session.duration = TimeUnit.MILLISECONDS.toSeconds(SystemClock.elapsedRealtime() - sessionTimer.base)
 
                         // connect & save to Firebase
                         val db = FirebaseFirestore.getInstance().collection("sessions").document(userUid)
