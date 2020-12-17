@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
@@ -18,7 +19,9 @@ import com.hadenhiles.skilldrills.LoginActivity
 import com.hadenhiles.skilldrills.R
 import com.hadenhiles.skilldrills.models.Routine
 import kotlinx.android.synthetic.main.fragment_routines.*
+import kotlinx.android.synthetic.main.item_drill.view.*
 import kotlinx.android.synthetic.main.item_routine.view.*
+import kotlinx.android.synthetic.main.item_routine.view.nameTextView
 
 class RoutinesFragment : Fragment() {
 
@@ -102,6 +105,17 @@ class RoutinesFragment : Fragment() {
                 val intent = Intent(context?.applicationContext, RoutineActivity::class.java)
                 intent.putExtra("id", model.id)
                 startActivity(intent)
+            }
+
+            holder.itemView.removeRoutineButton.setOnClickListener {
+                if (!model.id.isNullOrEmpty()) {
+                    db.collection("routines").document(userUid).collection("routines").document(model.id!!)
+                        .delete()
+                        .addOnSuccessListener {
+                            Toast.makeText(context?.applicationContext, "Routine deleted", Toast.LENGTH_SHORT).show()
+                        }
+                        .addOnFailureListener { e -> println("Error deleting document $e") }
+                }
             }
         }
 
