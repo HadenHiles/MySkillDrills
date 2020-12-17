@@ -9,3 +9,13 @@ Users can re-perform routines from their session history, manage their drills an
 - Firebase
   - Cloud firestore
   - Authentication
+  
+## Minimum Viable Product
+- Users can now:
+  - Add/edit/delete drills
+  - Add/edit/delete routines with any number of drills
+  - Start an empty session and add drills to it
+  - Start a session from a saved routine
+  - Finish a session and save it to their history (or discard)
+  - View past sessions in the history tab
+  - View their profile image and logout from the profile tab
