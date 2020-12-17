@@ -48,7 +48,9 @@
         <item name="android:textColor">?attr/colorOnPrimary</item>
     </style>
 
-    <style name="AlertDialog" parent="Theme.MaterialComponents.DayNight.Dialog">
+    <style name="AlertDialog" parent="Base.Theme.AppCompat.Dialog">
         <item name="android:textColor">@color/textColor</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:colorAccent">@color/primaryColor</item>
     </style>
 </resources>
